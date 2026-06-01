@@ -58,19 +58,63 @@ Tailwind CSS is a utility-first CSS framework that provides low-level utility cl
 
 ## Installation & Setup
 
-### With Vite
+### Modern Setup with Vite (Tailwind CSS v4)
+
+Tailwind CSS v4 introduces an ultra-fast Rust-based engine (Oxide), CSS-first configuration, and native Vite plugin support without requiring `postcss.config.js` or `tailwind.config.js`.
+
+#### 1. Create Project & Install Dependencies
 
 ```bash
 npm create vite@latest my-app -- --template react-ts
 cd my-app
+npm install tailwindcss @tailwindcss/vite
+```
+
+#### 2. Configure Vite Plugin
+
+```typescript
+// vite.config.ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
+
+export default defineConfig({
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
+})
+```
+
+#### 3. Add Tailwind Directive to CSS
+
+In Tailwind CSS v4, simply import Tailwind in your main CSS file:
+
+```css
+/* src/index.css */
+@import "tailwindcss";
+
+/* Optional custom theme configuration using CSS variables */
+@theme {
+  --color-primary: #3B82F6;
+  --font-display: 'Inter', sans-serif;
+}
+```
+
+---
+
+### Legacy Setup (Tailwind CSS v3 with PostCSS)
+
+If you are maintaining a Tailwind CSS v3 project:
+
+```bash
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 ```
 
-### Configuration
-
 ```javascript
-// tailwind.config.js
+// tailwind.config.js (Tailwind v3)
+/** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -84,10 +128,8 @@ export default {
 }
 ```
 
-### Add Directives
-
 ```css
-/* src/index.css */
+/* src/index.css (Tailwind v3) */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

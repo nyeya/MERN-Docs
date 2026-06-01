@@ -90,31 +90,34 @@ shadcn/ui is not a traditional component library. Instead, it's a collection of 
 
 ### Prerequisites
 
+Create a React project with Tailwind CSS (or Next.js):
+
 ```bash
-# Must have a React + Tailwind CSS project
+# Vite + React + TypeScript
 npm create vite@latest my-app -- --template react-ts
 cd my-app
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p
+npm install tailwindcss @tailwindcss/vite
 ```
 
 ### Initialize shadcn/ui
 
+Use the official `shadcn` CLI:
+
 ```bash
-npx shadcn-ui@latest init
+npx shadcn@latest init
 ```
 
-This will:
-1. Install dependencies
-2. Configure `tailwind.config.js`
-3. Create `components.json`
-4. Set up CSS variables for theming
+This will guide you through setting up:
+1. TypeScript configuration and paths (`@/*`)
+2. Styling system & base color scheme (Slate, Zinc, Neutral, Stone, Gray)
+3. CSS variables for theming support
+4. Output directory for components
 
-### Configuration
+### Configuration (`components.json`)
 
 ```json
-// components.json
 {
+  "$schema": "https://ui.shadcn.com/schema.json",
   "style": "default",
   "rsc": false,
   "tsx": true,
@@ -122,25 +125,32 @@ This will:
     "config": "tailwind.config.js",
     "css": "src/index.css",
     "baseColor": "slate",
-    "cssVariables": true
+    "cssVariables": true,
+    "prefix": ""
   },
   "aliases": {
     "components": "@/components",
-    "utils": "@/lib/utils"
-  }
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
+  "iconLibrary": "lucide"
 }
 ```
 
 ### Install Components
 
 ```bash
-# Install specific components
-npx shadcn-ui@latest add button
-npx shadcn-ui@latest add card
-npx shadcn-ui@latest add dialog
+# Add individual components as needed
+npx shadcn@latest add button
+npx shadcn@latest add card
+npx shadcn@latest add dialog
+npx shadcn@latest add dropdown-menu
+```
 
 # Install multiple at once
-npx shadcn-ui@latest add button card dialog input
+npx shadcn@latest add button card dialog input
 ```
 
 ## Core Concepts
