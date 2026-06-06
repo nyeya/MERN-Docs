@@ -73,35 +73,74 @@ TSLint is deprecated. Use ESLint with TypeScript plugin instead.
 
 ## Installation & Setup
 
-### Installation
+### Modern Installation (ESLint 9+ Flat Config)
+
+ESLint 9 introduces the unified **Flat Config** system (`eslint.config.js` / `eslint.config.mjs`) enabled by default, replacing legacy `.eslintrc.*` formats.
 
 ```bash
 # npm
-npm install -D eslint
+npm install -D eslint @eslint/js typescript-eslint eslint-plugin-react eslint-plugin-react-hooks
 
 # yarn
-yarn add -D eslint
+yarn add -D eslint @eslint/js typescript-eslint eslint-plugin-react eslint-plugin-react-hooks
 
 # pnpm
-pnpm add -D eslint
+pnpm add -D eslint @eslint/js typescript-eslint eslint-plugin-react eslint-plugin-react-hooks
 ```
 
-### Initialize ESLint
-
-```bash
-npm init @eslint/config
-```
-
-### For React + TypeScript
-
-```bash
-npm install -D eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin eslint-plugin-react eslint-plugin-react-hooks
-```
-
-### Basic Configuration
+### Modern Configuration (`eslint.config.js`)
 
 ```javascript
-// .eslintrc.cjs
+// eslint.config.js (ESLint 9 Flat Config)
+import js from '@eslint/js'
+import tseslint from 'typescript-eslint'
+import reactPlugin from 'eslint-plugin-react'
+import reactHooksPlugin from 'eslint-plugin-react-hooks'
+
+export default tseslint.config(
+  { ignores: ['dist', 'node_modules', 'build'] },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  {
+    files: ['**/*.{ts,tsx}'],
+    plugins: {
+      react: reactPlugin,
+      'react-hooks': reactHooksPlugin,
+    },
+    rules: {
+      ...reactPlugin.configs.recommended.rules,
+      ...reactHooksPlugin.configs.recommended.rules,
+      'react/react-in-jsx-scope': 'off', // Not needed in React 17+
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
+  },
+)
+```
+
+### Package.json Scripts
+
+In ESLint 9 Flat Config, ESLint automatically targets files matching the config without needing the legacy `--ext` flag:
+
+```json
+{
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  }
+}
+```
+
+---
+
+### Legacy Configuration (.eslintrc.cjs - ESLint 8 and earlier)
+
+```javascript
+// .eslintrc.cjs (Legacy format)
 module.exports = {
   env: {
     browser: true,
@@ -114,17 +153,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended'
   ],
   parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true
-    },
-    ecmaVersion: 'latest',
-    sourceType: 'module'
-  },
-  plugins: [
-    'react',
-    '@typescript-eslint'
-  ],
+  plugins: ['react', '@typescript-eslint'],
   rules: {
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/no-unused-vars': 'warn'
@@ -133,17 +162,6 @@ module.exports = {
     react: {
       version: 'detect'
     }
-  }
-}
-```
-
-### Package.json Scripts
-
-```json
-{
-  "scripts": {
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix"
   }
 }
 ```

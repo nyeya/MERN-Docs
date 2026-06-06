@@ -10,7 +10,7 @@ Vitest is a next-generation testing framework powered by Vite. It provides a fas
 - Native ESM, TypeScript, and JSX support
 - Smart instant watch mode
 - Component testing (React, Vue, Svelte)
-- Built-in code coverage with c8
+- Built-in code coverage with @vitest/coverage-v8 or istanbul
 - Snapshot testing
 - Mocking utilities
 - Multi-threading with worker threads
