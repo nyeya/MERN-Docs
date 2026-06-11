@@ -120,11 +120,9 @@ my-app/
 └── tsconfig.json
 ```
 
-## Core Concepts
+### 1. App Router (Server Components & File Routing)
 
-### 1. App Router (New)
-
-File-based routing with React Server Components:
+File-based routing with React Server Components. In modern Next.js, route `params` and `searchParams` are Promises and should be awaited:
 
 ```typescript
 // app/page.tsx - Home page
@@ -138,18 +136,24 @@ export default function About() {
 }
 
 // app/blog/[slug]/page.tsx - Dynamic route
-export default function BlogPost({ params }: { params: { slug: string } }) {
-  return <h1>Post: {params.slug}</h1>
+export default async function BlogPost({ 
+  params 
+}: { 
+  params: Promise<{ slug: string }> 
+}) {
+  const { slug } = await params
+  return <h1>Post: {slug}</h1>
 }
 ```
 
 ### 2. Server Components vs Client Components
 
 ```typescript
-// Server Component (default)
+// Server Component (default) - runs on server, zero client bundle
 export default async function ServerComponent() {
   const data = await fetch('https://api.example.com/data')
-  return <div>{data}</div>
+  const json = await data.json()
+  return <div>{json.title}</div>
 }
 
 // Client Component (use 'use client')
@@ -158,7 +162,7 @@ import { useState } from 'react'
 
 export default function ClientComponent() {
   const [count, setCount] = useState(0)
-  return <button onClick={() => setCount(count + 1)}>{count}</button>
+  return <button onClick={() => setCount(count + 1)}>Count: {count}</button>
 }
 ```
 
@@ -181,39 +185,37 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 // app/dashboard/layout.tsx - Nested layout
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div>
-      <aside>Sidebar</aside>
-      <main>{children}</main>
+    <div className="flex">
+      <aside className="w-64">Sidebar</aside>
+      <main className="flex-1">{children}</main>
     </div>
   )
 }
 ```
 
-### 4. Data Fetching
+### 4. Data Fetching & Caching Strategies
 
 ```typescript
-// Server Component - Fetch at build time
+// Default fetch behavior: Uncached dynamic fetch (equivalent to SSR)
 export default async function Page() {
+  const res = await fetch('https://api.example.com/data')
+  const data = await res.json()
+  return <div>{data.title}</div>
+}
+
+// Static Data Fetching (cached indefinitely / SSG)
+export default async function StaticPage() {
   const res = await fetch('https://api.example.com/data', {
-    cache: 'force-cache' // SSG
+    cache: 'force-cache'
   })
   const data = await res.json()
   return <div>{data.title}</div>
 }
 
-// Revalidate every 60 seconds
-export default async function Page() {
+// Incremental Static Regeneration (revalidate every 60 seconds)
+export default async function ISRPage() {
   const res = await fetch('https://api.example.com/data', {
-    next: { revalidate: 60 } // ISR
-  })
-  const data = await res.json()
-  return <div>{data.title}</div>
-}
-
-// No caching - SSR
-export default async function Page() {
-  const res = await fetch('https://api.example.com/data', {
-    cache: 'no-store' // SSR
+    next: { revalidate: 60 }
   })
   const data = await res.json()
   return <div>{data.title}</div>
@@ -392,12 +394,20 @@ export default function Page() {
   )
 }
 
-// next.config.js
-module.exports = {
+// next.config.mjs
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   images: {
-    domains: ['example.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'example.com',
+      },
+    ],
   },
 }
+
+export default nextConfig
 ```
 
 ### 4. Middleware
