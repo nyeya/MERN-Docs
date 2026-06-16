@@ -157,11 +157,8 @@ const channel = supabase
 ```bash
 npm install @supabase/supabase-js
 
-# For React
-npm install @supabase/auth-helpers-react
-
-# For Next.js
-npm install @supabase/auth-helpers-nextjs
+# For SSR Frameworks (Next.js / Remix / SvelteKit)
+npm install @supabase/ssr
 ```
 
 ### 3. Environment Variables
