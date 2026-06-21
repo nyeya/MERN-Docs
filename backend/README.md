@@ -97,10 +97,10 @@ Each tutorial includes:
 
 ## 🛠️ Prerequisites
 
-- Node.js v18+ installed
+- Node.js v20+ LTS / v22+ LTS installed
 - Basic JavaScript/TypeScript knowledge
 - Understanding of HTTP and REST APIs
-- Familiarity with npm/yarn
+- Familiarity with npm/pnpm/yarn
 
 ## 💡 Tips
 

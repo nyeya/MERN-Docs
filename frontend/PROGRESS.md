@@ -105,22 +105,6 @@
 - ⏳ Prettier
 - ⏳ Biome
 
-### Utilities & Helpers (5 remaining)
-- ⏳ date-fns
-- ⏳ Lodash
-- ⏳ clsx
-- ⏳ React Icons
-- ⏳ Lucide React
-
-### Charts & Visualization (4 remaining)
-- ⏳ Recharts
-- ⏳ Chart.js with React
-- ⏳ Victory
-- ⏳ Visx
-
-### Tables & Data Grids (0 remaining)
-- ✅ All completed!
-
 ### Drag & Drop (2 remaining)
 - ⏳ dnd kit
 - ⏳ React DnD
@@ -135,9 +119,9 @@
 
 ## 📊 Statistics
 
-- **Total Tutorials**: 60
-- **Completed**: 15 (25%)
-- **Remaining**: 45 (75%)
+- **Total Planned Frontend Tutorials**: 60
+- **Completed Frontend Tutorials**: 28 (46.7%)
+- **Remaining Frontend Tutorials**: 32 (53.3%)
 - **Categories**: 16
 
 ## 🎯 Priority for Next Tutorials

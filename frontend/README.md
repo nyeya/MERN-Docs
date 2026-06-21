@@ -138,9 +138,9 @@ Each tutorial follows a consistent structure:
 3. Use **TanStack Table** for complex data grids
 4. Implement **Playwright** for E2E testing
 
-## 🔄 Updates
+## 🔄 Updates & Best Practices
 
-This guide is regularly updated to reflect the latest versions and best practices in the React ecosystem. Last updated: October 2025.
+This guide is actively maintained to reflect modern versions and best practices across the React ecosystem.
 
 ## 📝 Contributing
 
