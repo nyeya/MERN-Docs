@@ -4,10 +4,11 @@ A comprehensive collection of in-depth tutorials covering the entire MERN (Mongo
 
 ## 📚 Repository Structure
 
-This repository is organized into two main sections:
+This repository is organized into three main sections:
 
-- **[Backend](./backend/)** - Node.js/Express backend development
-- **[Frontend](./frontend/)** - Modern React development
+- **[Backend](./backend/)** - Node.js/Express backend development (15 guides)
+- **[Frontend](./frontend/)** - Modern React development (28 guides)
+- **[Serverless Databases](./serverless-databases/)** - Cloud & Serverless database solutions (Supabase, Firebase, Convex, etc.)
 
 ## 🚀 Backend Tutorials (15 Complete Guides)
 
@@ -174,15 +175,15 @@ Each tutorial follows a comprehensive and consistent structure:
 
 ## 🛠️ Prerequisites
 
-- **Node.js** v18+ installed
+- **Node.js** v20+ LTS / v22+ LTS installed
 - **Basic JavaScript/TypeScript** knowledge
 - **Understanding of HTTP** and REST APIs
-- **Familiarity with npm/yarn** package management
+- **Familiarity with npm/pnpm/yarn** package management
 - **Basic React** knowledge (for frontend tutorials)
 
 ## 💡 How to Use This Repository
 
-1. **Browse by Category** - Navigate to backend or frontend folders
+1. **Browse by Category** - Navigate to backend, frontend, or serverless-databases folders
 2. **Follow Learning Paths** - Use the recommended learning paths above
 3. **Study Independently** - Each tutorial is self-contained
 4. **Practice with Examples** - All code examples are production-ready
@@ -209,10 +210,11 @@ Each tutorial follows a comprehensive and consistent structure:
 
 ## 📊 Repository Statistics
 
-- **Total Tutorials:** 43 complete in-depth guides
+- **Total Tutorials:** 47 complete in-depth guides
 - **Backend Tutorials:** 15
 - **Frontend Tutorials:** 28
-- **Total Categories:** 26
+- **Serverless Database Guides:** 4 (Supabase, Firebase, Convex, and overview guide)
+- **Total Categories:** 27
 - **Code Examples:** Production-ready with TypeScript support
 - **Coverage:** Modern best practices and security considerations
 
@@ -224,7 +226,7 @@ Each tutorial follows a comprehensive and consistent structure:
 - ✅ **Comparison Tables** - Detailed comparisons with alternatives
 - ✅ **Security Focus** - Security considerations throughout
 - ✅ **Real-World Examples** - Practical, applicable code
-- ✅ **Modern Stack** - Latest versions and practices (2025)
+- ✅ **Modern Stack** - Up to date with latest frameworks and tooling
 - ✅ **Self-Contained** - Each tutorial is independent
 
 ## 🚀 Getting Started
@@ -259,9 +261,9 @@ Each tutorial includes:
 - Links to official documentation
 - TypeScript examples where applicable
 
-## 🔄 Updates
+## 🔄 Maintenance & Standards
 
-This repository is maintained with the latest versions and best practices as of **2025**. All tutorials reflect current industry standards and modern development practices.
+This repository is maintained with modern best practices, type safety, and active library versions. All tutorials reflect current industry standards and modern development workflows.
 
 ## 📚 Additional Resources
 
